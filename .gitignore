@@ -60,3 +60,6 @@ node_modules/
 
 # MacOS
 .DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
