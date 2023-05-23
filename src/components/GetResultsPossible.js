@@ -1,9 +1,7 @@
 export default async function GetResultsPossible(tirage) {
     const response = await fetch(process.env.PUBLIC_URL + '/dic.txt')
-    console.log(response)
     const data = await response.text();
     const dictionary = data.split('\n');
-    console.log(data)
 
     const resultsPossible = dictionary.filter((word) => {
         let tempTirage = [...tirage];

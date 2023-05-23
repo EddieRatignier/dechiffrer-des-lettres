@@ -26,10 +26,21 @@ export default function PlayDaily({ answers, setAnswers, setStatus }) {
         const date = new Date();
         const randomSeeded = RandomSeed.create(date.getDate() + '' + date.getMonth() + '' + date.getFullYear());
         const alphabet = { 0: 'z', 1: "a", 2: "b", 3: "c", 4: "d", 5: "e", 6: "f", 7: "g", 8: "h", 9: "i", 10: "j", 11: "k", 12: "l", 13: "m", 14: "n", 15: "o", 16: "p", 17: "q", 18: "r", 19: "s", 20: "t", 21: "u", 22: "v", 23: "w", 24: "x", 25: "y" };
+        const nearestVowel = { b: 'a', c: 'a', d: 'e', f: 'e', g: 'e', h: 'e', j: 'i', k: 'i', l: 'i', m: 'i', n: 'o', p: 'o', q: 'o', r: 'o', s: 'u', t: 'u', v: 'u', w: 'u', x: 'u', y: 'u', z: 'u' };
+        const vowels = ['a', 'e', 'i', 'o', 'u', 'y'];
         let tempTirage = [];
+        let countVowels = 0;
         for (let i = 0; i < 10; i++) {
             let index = Math.floor(randomSeeded.random() * 26);
-            tempTirage.push(alphabet[index])
+            let tempLetter = alphabet[index];
+            if (vowels.includes(tempLetter)) {
+                countVowels++;
+            }
+            if (i > 7 && !(countVowels === 3)) {
+                tempTirage.push(nearestVowel[tempLetter]);
+            } else {
+                tempTirage.push(tempLetter);
+            }
         }
         setRemainLetters(tempTirage);
         GetResultsPossible(tempTirage).then((response) => {
@@ -102,6 +113,8 @@ export default function PlayDaily({ answers, setAnswers, setStatus }) {
             } else {
                 tempAnswers.push([tempMot, 0]);
             }
+            setAnswerLetters(['', '', '', '', '', '', '', '', '', '']);
+            setRemainLetters(manche.tirage);
             setAnswers(tempAnswers);
             Cookies.set('score', JSON.stringify(tempAnswers), { expires: midnight });
         }

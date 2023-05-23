@@ -10,7 +10,10 @@ export default function Score({ points }) {
         <div className='container slide-left'>
             <div className='box'>
                 <div className='title-box'>Partie terminée</div>
-                <div className='rules'>Votre score est de <span className='bold'>{points} {points > 0 ? 'points' : 'point'}</span> !</div>
+                <div>
+                    <p className='italic center-text'>Sur cette partie, vous avez gagné</p>
+                    <p className='center-text big-text'>{points} point{points > 1 ? 's' : ''}</p>
+                </div>
                 <button className='button w-100 bg-normal' style={{ marginTop: '2vh' }} onClick={() => navigate('/')}><FontAwesomeIcon icon={faHouse} style={{ color: 'white', marginRight: '8px' }} />Menu principal</button>
             </div>
         </div>

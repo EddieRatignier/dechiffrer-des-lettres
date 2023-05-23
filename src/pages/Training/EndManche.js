@@ -31,11 +31,17 @@ export default function EndManche({ resultsPossible, mot, index, resultValid, ea
             <div className='box'>
                 <div className='title-box'>Fin de la manche  {index + 1}</div>
                 {resultValid ?
-                    <span>Le mot <span className='italic'>{mot.toUpperCase()}</span> est valide.<br />Vous gagnez <span className='bold'>{earnPoints} points</span> sur cette manche.</span>
+                    <div>
+                        <p className='italic center-text'>Le mot {mot.toUpperCase()} est valide. Vous gagnez</p>
+                        <p className='center-text big-text'>{earnPoints} point{earnPoints > 1 ? 's' : ''}</p>
+                    </div>
                     :
-                    <span>Le mot <span className='italic'>{mot.toUpperCase()}</span> n'est pas valide.<br />Vous ne gagnez pas de point sur cette manche.</span>
-                }
-                <span>Voici quelques mots qui étaient valides : {fewResults()}</span>
+                    <div>
+                        <p className='italic center-text'>Le mot {mot.toUpperCase()} n'est pas valide. Vous gagnez</p>
+                        <p className='center-text big-text'>0 point</p>
+
+                    </div>}
+                <span>Voici quelques possibilités : {fewResults()}</span>
                 <button className='button w-100 bg-normal' onClick={newWord}><FontAwesomeIcon icon={faForward} style={{ color: 'white', marginRight: '8px' }} />Manche suivante</button>
 
             </div>
